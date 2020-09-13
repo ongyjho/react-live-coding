@@ -240,3 +240,46 @@ function renderElement(node) {
 }
 ```
 - 여기까지의 라이브 코딩 저장소는 따로 생성했다.(https://github.com/ongyjho/tiny-react)
+
+### Hook 
+- useState
+	- 이전까지의 리액트에서는 함수형 컴포넌트는 상태를 가지기가 어려웠는데 16.8 이후부터는 `useState` 함수를 이용하여 상태를 가지고 변경할 수 있게 되었다.
+	- 함수 컴포넌트의 상태는 `useState `으로 관리할 수 있다.
+```
+ const [count, setCount] = useState(1); // 초기값을 세팅해준다.
+```
+	- `useState`를 호출하면 배열이 반환된다. 첫번째 값은 현재 값이고 두번째는 상태를 변경해주는 함수(`dispatcher`)가 반환된다.(`setter function`)
+
+```
+import React from "react";
+const SesstionItem = ({ title }) => <li>{title}</li>;
+const App = (props) => {
+  const [displayOrder, toggleDisplayOrder] = React.useState("ASC");
+  // 상태를 만들고 저장해주는 훅
+  const onToggleDisplayOrder = () => {
+    toggleDisplayOrder(displayOrder === "ASC" ? "DESC" : "ASC");
+  const { sessionList } = props.store;
+  const order = sessionList.map((session, i) => ({
+    ...session,
+    order: i
+  }));
+  return (
+    <div>
+      <header>
+        <h1> hello ongyjho </h1>
+      </header>
+      <p>
+        전체 세션 갯수: {sessionList.length} 개 {displayOrder}
+      </p>
+      <button onClick={onToggleDisplayOrder}> 재정렬 </button>
+      <ul>
+        {sessionList.map((session) => (
+          <SesstionItem title={session.title} />
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+export default App;
+```
