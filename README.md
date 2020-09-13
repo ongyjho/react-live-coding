@@ -239,3 +239,4 @@ function renderElement(node) {
   return $el;
 }
 ```
+- 여기까지의 라이브 코딩 저장소는 따로 생성했다.(https://github.com/ongyjho/tiny-react)
